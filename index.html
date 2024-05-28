@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Death</title>
+<style>
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.container.hidden {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.container.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.container h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-group button {
+  background-color: #FF5733;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s;
+}
+
+.form-group button:hover {
+  background-color: #C70039;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-container {
+  display: none;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 1s forwards;
+}
+
+.result-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.result-container p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.result-container button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s;
+}
+
+.result-container button:hover {
+  background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="container" id="input-container">
+  <h1>Find My Death</h1>
+  <form id="death-form">
+    <div class="form-group">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="dob">Select your D.O.B:</label>
+      <input type="date" id="dob" name="dob" required>
+    </div>
+    <div class="form-group">
+      <button type="submit">Find My Death</button>
+    </div>
+  </form>
+</div>
+
+<div class="result-container" id="result-container">
+  <h2>Death Prediction</h2>
+  <p id="result-text"></p>
+  <button onclick="window.location.reload();">Try Again</button>
+</div>
+
+<script>
+document.getElementById('death-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const dob = document.getElementById('dob').value;
+  
+  const deathReasons = [
+    "bandi chaud gyii isiliye",
+    "daru daru time pr nahi mili",
+    "thick thighs vali girl ni mili",
+    "placement ni lgi",
+    "papa ne ciggrate pite hue dekh liya ",
+    "bandi ke sath jiski thi usne dekh lia",
+    "kali billi ne rasta kaat dia",
+    "sote sote akh bnd rh gyi"
+  ];
+
+  const randomReason = deathReasons[Math.floor(Math.random() * deathReasons.length)];
+  const randomYear = Math.floor(Math.random() * (2100 - 2024 + 1)) + 2024;
+  const randomMonth = Math.floor(Math.random() * 12) + 1;
+  const randomDay = Math.floor(Math.random() * 28) + 1;
+  const deathDate = new Date(randomYear, randomMonth - 1, randomDay).toDateString();
+
+  const resultText = `${name}, you will die on ${deathDate} because  ${randomReason}.`;
+
+  document.getElementById('result-text').textContent = resultText;
+  document.getElementById('input-container').classList.add('hidden');
+
+  setTimeout(() => {
+    document.getElementById('input-container').style.display = 'none';
+    document.getElementById('result-container').style.display = 'block';
+  }, 300);
+});
+</script>
+</body>
+</html>
